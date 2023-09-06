@@ -1,0 +1,24 @@
+<div style="margin-left:16vw;margin-right:16vw">
+<div id="display">
+    <div style="display: flex;align-items: center;">
+        <p style="margin: 0%;font-size: x-large;">Compounds</p>
+    </div>
+    <app-button text="{{showAddTask ? 'Close':'Add'}}" color="{{showAddTask ? 'red':'green'}}" (click)="onClick()"></app-button>
+</div>
+<app-add-compound *ngIf="showAddTask" (addCompound)="addCompound($event)"></app-add-compound>
+<div id="cards">
+<app-compound-item [ngStyle]="{'width':'220px'}"x *ngFor="let compound of compounds" [compound]="compound" (deleteClick)="deleteCompound($event)"></app-compound-item>
+</div>
+<div style="display: flex;justify-content: space-between;padding-left: 10px;padding-right: 10px;">
+    <div>
+        <p style="cursor: pointer;" *ngIf="currPage!==1" [routerLink]="['']" [queryParams]="{pg:1}">Jump To first Page</p>
+    </div>
+    <div>
+        <p>{{"Page " + currPage + " of " + totalPage }}</p>
+    </div>
+    <div style="display: flex;justify-content: space-between;width: 10%;">
+        <p style="cursor: pointer;" *ngIf="currPage!==1" [routerLink]="['']" [queryParams]="{pg:currPage-1}">Prev</p>
+        <p style="cursor: pointer;" *ngIf="currPage!==totalPage" [routerLink]="['']" [queryParams]="{pg:currPage+1}">Next</p>
+    </div>
+</div>
+</div>
